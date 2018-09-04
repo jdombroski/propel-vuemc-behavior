@@ -1,0 +1,23 @@
+{
+    "name" : "jdombroski/propel-vuemc-behavior",
+    "description": "Behavior for generated VueMC models & collections from propel schema.",
+    "keywords": [
+        "propel",
+        "behavior",
+        "VueMC"
+    ],
+    "type" : "propel-behavior",
+    "license" : "MIT",
+    "autoload" : {
+		"psr-4" : {
+			"jdombroski\\propel\\behavior\\vuemc\\" : "src"
+		}
+    },
+    "require": {
+        "propel/propel" : "~2.0@dev"
+    },
+    "extra": {
+        "name": "vuemc",
+        "class": "jdombroski\\Propel\\Behavior\\VueMC\\VueMCBehavior"
+    }
+}
