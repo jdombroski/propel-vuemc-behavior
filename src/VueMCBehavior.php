@@ -41,7 +41,7 @@ class VueMCBehavior extends Behavior
         $directory = "{$this->jsDirectory}/{$this->getTable()->getNamespace()}";
 
         if(!file_exists($directory)) {
-            mkdir($directory);
+            mkdir($directory, 0777, true);
         }
 
         $data = [
