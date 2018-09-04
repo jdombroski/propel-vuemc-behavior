@@ -9,9 +9,9 @@
     "type" : "propel-behavior",
     "license" : "MIT",
     "autoload" : {
-		"files" : [
-			"src/VueMCBehavior.php"
-        ]
+		"psr-0" : {
+			"jdombroski\\propel\\behavior\\vuemc\\" : "src"
+		}
     },
     "require": {
         "propel/propel" : "~2.0@dev"
