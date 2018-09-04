@@ -42,11 +42,15 @@ class VueMCBehavior extends Behavior
     {
         $this->getTable()->getNamespace();
 
-        $directory = "{$this->jsDirectory}/{$this->getParameter("path")}";
+        $directory = "{$this->jsDirectory}/{$this->getParameter("path")}/vuemc";
         $baseDirectory = "{$directory}/base";
 
         if(!file_exists($directory)) {
             mkdir($directory, 0777, true);
+        }
+
+        if(!file_exists($baseDirectory)) {
+            mkdir($baseDirectory, 0777, true);
         }
 
         $data = [
