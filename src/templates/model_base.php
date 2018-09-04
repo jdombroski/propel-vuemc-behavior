@@ -1,4 +1,4 @@
-import {Model, Collection} from 'vue-mc'
+import { Model } from 'vue-mc'
 
 /**
  * <?= $phpName; ?> model
@@ -17,9 +17,6 @@ class <?= $phpName; ?> extends Model {
     // Attribute mutations.
     mutations() {
         return {
-            id:   (id) => Number(id) || null,
-            name: String,
-            done: Boolean,
         }
     }
 
@@ -33,33 +30,6 @@ class <?= $phpName; ?> extends Model {
     routes() {
         return {
             <?php foreach($modelRoutes as $name => $route) : ?>
-            <?= $name; ?>: '<?= $route; ?>',
-            <?php endforeach ?>
-        }
-    }
-}
-
-/**
- * <?= $phpName; ?> collection
- */
-class <?= $phpNamePlural; ?> extends Collection {
-
-    // Model that is contained in this collection.
-    model() {
-        return <?= $phpName; ?>;
-    }
-
-    // Default attributes
-    defaults() {
-        return {
-            orderBy: 'name',
-        }
-    }
-
-    // Route configuration
-    routes() {
-        return {
-            <?php foreach($collectionRoutes as $name => $route) : ?>
             <?= $name; ?>: '<?= $route; ?>',
             <?php endforeach ?>
         }

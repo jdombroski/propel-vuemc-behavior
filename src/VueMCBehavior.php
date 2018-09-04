@@ -9,7 +9,11 @@ use Propel\Common\Pluralizer\PluralizerInterface;
 class VueMCBehavior extends Behavior
 {
     // default parameters value
-    protected $parameters = [];
+    protected $parameters = [
+        "path" => null,
+        "modelRoutes" => "",        //  json_decodeable
+        "collectionRoutes" => "",   //  json_decodeable
+    ];
 
     private $jsDirectory = 'K:\Workspace\leasingio\resources\assets\js';
     
@@ -38,7 +42,8 @@ class VueMCBehavior extends Behavior
     {
         $this->getTable()->getNamespace();
 
-        $directory = "{$this->jsDirectory}/{$this->getTable()->getNamespace()}";
+        $directory = "{$this->jsDirectory}/{$this->getParameter("path")}";
+        $baseDirectory = "{$directory}/base";
 
         if(!file_exists($directory)) {
             mkdir($directory, 0777, true);
@@ -47,20 +52,32 @@ class VueMCBehavior extends Behavior
         $data = [
             "phpName" => $this->getTable()->getPhpName(),
             "attributes" => [],
-            "phpNamePlural" => $this->getPluralizer()->getPluralForm($this->getTable()->getName()),
-            "modelRoutes" => [],
-            "collectionRoutes" => []
+            "phpNamePlural" => $this->getPluralizer()->getPluralForm($this->getTable()->getPhpName()),
+            "modelRoutes" => json_decode($this->getParameter("modelRoutes"), true),
+            "collectionRoutes" => json_decode($this->getParameter("collectionRoutes"), true)
         ];
 
         foreach($this->getTable()->getColumns() as $column) {
             $data["attributes"][] = [
                 "name" => $column->getPhpName(),
-                "defaultValue" => $column->getDefaultValue()
+                "defaultValue" => $column->getDefaultValue() ? $column->getDefaultValue() : "'null'"
             ];
         }
 
-        $js = $this->renderTemplate('vuemc', $data);
-        file_put_contents("{$directory}/{$this->getTable()->getPhpName()}.js", $js);
-        
+        $modelJs = $this->renderTemplate('model_base', $data);
+        $collectionJs = $this->renderTemplate('collection_base', $data);
+
+        file_put_contents("{$baseDirectory}/" . strtolower($data["phpName"]) . ".js", $modelJs);
+        file_put_contents("{$baseDirectory}/" . strtolower($data["phpNamePlural"]) . ".js", $modelJs);
+
+        if(!file_exists("{$directory}/" . strtolower($data["phpName"]) . ".js")) {
+            $modelJs = $this->renderTemplate('model', $data);
+            file_put_contents("{$directory}/" . strtolower($data["phpName"]) . ".js", $modelJs);
+        }
+
+        if(!file_exists("{$directory}/" . strtolower($data["phpNamePlural"]) . ".js")) {
+            $collectionJs = $this->renderTemplate('collection', $data);
+            file_put_contents("{$directory}/" . strtolower($data["phpNamePlural"]) . ".js", $collectionJs);
+        }
     }
 }
