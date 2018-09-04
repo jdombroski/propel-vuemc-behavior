@@ -48,6 +48,7 @@ class VueMCBehavior extends Behavior
             "phpName" => $this->getTable()->getPhpName(),
             "attributes" => [],
             "phpNamePlural" => $this->getPluralizer()->getPluralForm($this->getTable()->getName()),
+            "modelRoutes" => [],
             "collectionRoutes" => []
         ];
 
