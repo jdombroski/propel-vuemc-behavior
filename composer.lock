@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ee94ea46352e21d395128d27d9fcf811",
+    "content-hash": "761e0700bb40febe9017d166a0fa3e72",
     "packages": [
         {
-            "name": "propel/propel",
-            "version": "dev-master",
+            "name": "jdombroski/propel",
+            "version": "2.0.0-alpha8",
             "source": {
                 "type": "git",
-                "url": "https://github.com/propelorm/Propel2.git",
-                "reference": "6c4996fc130c7555d82d9dca04396c6f3eeef306"
+                "url": "https://github.com/jdombroski/Propel2.git",
+                "reference": "4c309e3e5adaba077f54c0fab93c34995d7c9b3d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/propelorm/Propel2/zipball/6c4996fc130c7555d82d9dca04396c6f3eeef306",
-                "reference": "6c4996fc130c7555d82d9dca04396c6f3eeef306",
+                "url": "https://api.github.com/repos/jdombroski/Propel2/zipball/4c309e3e5adaba077f54c0fab93c34995d7c9b3d",
+                "reference": "4c309e3e5adaba077f54c0fab93c34995d7c9b3d",
                 "shasum": ""
             },
             "require": {
@@ -68,7 +68,7 @@
                 "orm",
                 "persistence"
             ],
-            "time": "2018-02-19T13:36:42+00:00"
+            "time": "2018-02-19T12:58:55+00:00"
         },
         {
             "name": "psr/log",
@@ -683,7 +683,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "propel/propel": 20
+        "jdombroski/propel": 15
     },
     "prefer-stable": false,
     "prefer-lowest": false,

@@ -8,9 +8,9 @@ class <?= $phpName; ?> extends Model {
     // Default attributes that define the "empty" state.
     defaults() {
         return {
-            <?php foreach($attributes as $attribute) : ?>
-            <?= $attribute["name"]; ?>:   <?= $attribute["defaultValue"]; ?>,
-            <?php endforeach ?>
+        <?php foreach($attributes as $attribute) : ?>
+        <?= $attribute["name"]; ?>: <?= $attribute["defaultValue"]; ?>,
+        <?php endforeach ?>
         }
     }
 

@@ -57,14 +57,16 @@ class VueMCBehavior extends Behavior
             "phpName" => $this->getTable()->getPhpName(),
             "attributes" => [],
             "phpNamePlural" => $this->getPluralizer()->getPluralForm($this->getTable()->getPhpName()),
-            "modelRoutes" => yaml_parse($this->getParameter("modelRoutes")),
-            "collectionRoutes" => yaml_parse($this->getParameter("collectionRoutes"))
+            "modelRoutes" => json_decode($this->getParameter("modelRoutes"), true),
+            "collectionRoutes" => json_decode($this->getParameter("collectionRoutes"), true)
         ];
+
+        var_dump($data["modelRoutes"]);
 
         foreach($this->getTable()->getColumns() as $column) {
             $data["attributes"][] = [
                 "name" => $column->getPhpName(),
-                "defaultValue" => $column->getDefaultValue() ? $column->getDefaultValue() : "'null'"
+                "defaultValue" => $column->getDefaultValueString()
             ];
         }
 
@@ -72,7 +74,7 @@ class VueMCBehavior extends Behavior
         $collectionJs = $this->renderTemplate('collection_base', $data);
 
         file_put_contents("{$baseDirectory}/" . strtolower($data["phpName"]) . ".js", $modelJs);
-        file_put_contents("{$baseDirectory}/" . strtolower($data["phpNamePlural"]) . ".js", $modelJs);
+        file_put_contents("{$baseDirectory}/" . strtolower($data["phpNamePlural"]) . ".js", $collectionJs);
 
         if(!file_exists("{$directory}/" . strtolower($data["phpName"]) . ".js")) {
             $modelJs = $this->renderTemplate('model', $data);
