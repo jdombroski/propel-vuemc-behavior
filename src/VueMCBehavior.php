@@ -11,8 +11,8 @@ class VueMCBehavior extends Behavior
     // default parameters value
     protected $parameters = [
         "path" => null,
-        "modelRoutes" => "",        //  json_decodeable
-        "collectionRoutes" => "",   //  json_decodeable
+        "modelRoutes" => "",        //  yaml_decodeable
+        "collectionRoutes" => "",   //  yaml_decodeable
     ];
 
     private $jsDirectory = 'K:\Workspace\leasingio\resources\assets\js';
@@ -57,8 +57,8 @@ class VueMCBehavior extends Behavior
             "phpName" => $this->getTable()->getPhpName(),
             "attributes" => [],
             "phpNamePlural" => $this->getPluralizer()->getPluralForm($this->getTable()->getPhpName()),
-            "modelRoutes" => json_decode($this->getParameter("modelRoutes"), true),
-            "collectionRoutes" => json_decode($this->getParameter("collectionRoutes"), true)
+            "modelRoutes" => yaml_parse($this->getParameter("modelRoutes")),
+            "collectionRoutes" => yaml_parse($this->getParameter("collectionRoutes"))
         ];
 
         foreach($this->getTable()->getColumns() as $column) {

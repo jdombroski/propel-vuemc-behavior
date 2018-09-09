@@ -14,7 +14,7 @@
         ]
     },
     "require": {
-        "propel/propel" : "~2.0@dev"
+        "jdombroski/propel" : "^2.0@alpha"
     },
     "extra": {
         "name": "vuemc",
